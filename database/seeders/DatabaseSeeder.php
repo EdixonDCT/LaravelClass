@@ -1,0 +1,58 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\FormationProgram;
+use App\Models\StateUser;
+use App\Models\Ficha;
+use App\Models\User;
+use App\Models\Profile;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class DatabaseSeeder extends Seeder
+{
+    use WithoutModelEvents;
+
+    /**
+     * Seed the application's database.
+     */
+    public function run(): void
+    {
+        StateUser::create([
+            'name' => 'Activo',
+        ]);
+
+        StateUser::create([
+            'name' => 'Inactivo',
+        ]);
+
+        StateUser::create([
+            'name' => 'Pendiente',
+        ]);
+
+        FormationProgram::create([
+            'name'=> 'Adso',
+        ]);
+
+        Ficha::create([
+            'name'=> '2894667',
+            'formation_program_id' => 1,
+        ]);
+
+        User::create([
+            'document' => '1140424793',
+            'password' => 'ABC123',
+            'state_user_id' => '1',
+        ]);
+
+        Profile::create([
+            'user_id' => 1,
+            'names' => 'Edixon David',
+            'last_names' => 'Castillo Torres',
+            'phone' => '3227016801',
+            'email' => 'edixondelta2022@gmail.com',
+            'ficha_id' => 1,
+        ]);
+    }
+}
