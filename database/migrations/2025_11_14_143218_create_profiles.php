@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('last_names');
             $table->string('phone');
             $table->string('email');
-            $table->foreignId('ficha_id')->constrained();
+            $table->foreignId('ficha_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

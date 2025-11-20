@@ -7,6 +7,8 @@ use App\Models\StateUser;
 use App\Models\Ficha;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Role;
+use App\Models\RolesUser;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -42,8 +44,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'document' => '1140424793',
-            'password' => 'ABC123',
-            'state_user_id' => '1',
+            'password' => Hash::make('ABC123'),
+            'state_user_id' => 1,   
         ]);
 
         Profile::create([
@@ -53,6 +55,27 @@ class DatabaseSeeder extends Seeder
             'phone' => '3227016801',
             'email' => 'edixondelta2022@gmail.com',
             'ficha_id' => 1,
+        ]);
+
+        Role::create([
+            'name' => 'Administrador'
+        ]);
+
+        Role::create([
+            'name' => 'Ayudante'
+        ]);
+
+        Role::create([
+            'name' => 'Instructor'
+        ]);
+
+        Role::create([
+            'name' => 'Aprendiz'
+        ]);
+
+        RolesUser::create([
+            'user_id' => '1',
+            'role_id' => '1'
         ]);
     }
 }

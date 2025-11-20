@@ -42,4 +42,8 @@ class User extends Authenticatable
         return $this->hasMany(Profile::class, 'user_id');
     }
 
+    public function roleUser()
+    {
+        return $this->hasMany(RolesUser::class, 'user_id');
+    }
 }
