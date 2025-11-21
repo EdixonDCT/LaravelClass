@@ -10,9 +10,9 @@ use App\Models\RolesUser;
 use App\Models\Ficha;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreRegisterRequest;
+use App\Http\Requests\StoreRegisterAprendizRequest;
 
-class RegisterController extends Controller
+class RegisterAprendizController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,15 +25,16 @@ class RegisterController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRegisterRequest $request)
+    public function store(StoreRegisterAprendizRequest $request)
     {
-        // $documentoExiste = DB::table('users')->where('document', $request->document)->exists();
-        // $rolExiste = DB::table('roles')->where('name', $request->rol)->exists();
-        // $fichasExiste = DB::table('fichas')->where('name', $request->ficha)->exists();        
-        
-        // if ($documentoExiste) return response()->json(['El usuario ya existe.'],400);
-        // if (!$rolExiste) return response()->json(['El rol no existe.'],404);
-        // if (!$fichasExiste) return response()->json(['La ficha no existe.'],404);
+//         { probador
+//   "document": "1234567890",
+//   "names": "Edixon",
+//   "last_names": "Gomez",
+//   "phone": "3001234567",
+//   "email": "edixon@example.com",
+//   "ficha": "2894667"
+// }
         try {
 
         $request->validated();
@@ -46,12 +47,10 @@ class RegisterController extends Controller
         ]);
 
         $id = $crearUser->id;
-
-        $rol = $request->rol;
         
         $RolUser = RolesUser::create([
             "user_id"=> $id,
-            "role_id"=> Role::where('name',$rol)->first()->id,
+            "role_id"=> 4,
         ]);
 
         $profile = Profile::create([
@@ -60,23 +59,17 @@ class RegisterController extends Controller
             "last_names"=> $request->last_names,
             "phone"=> $request->phone,
             "email"=> $request->email,
+            "ficha_id"=> Ficha::where('name',$request->ficha)->first()->id,
         ]);
 
-        return response()->json(['Se creo el usuario Correctamente.'],201);
-        // $datos = $request->only((new User)->getFillable());
-        // $datos = $request->only((new User)->getFillable()) + [
-        // 'state_user_id' => 1];   
+        return response()->json(['Se creo el Usuario Aprendiz Correctamente.'],201);
 
-        // $crearUser = User::create($datos);
-
-
-        // return $crearUser;
         } catch (\Exception $e) {
-    return response()->json([
-        'message' => 'Error al registrar usuario',
-        'error' => $e->getMessage()
-    ], 500);
-}
+            return response()->json([
+                'message' => 'Error al registrar Usuario Aprendiz',
+                'error' => $e->getMessage()
+        ], 500);
+        }
     }
 
     /**

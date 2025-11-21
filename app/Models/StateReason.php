@@ -4,16 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Ficha;
+use App\Models\Reason;
 
-class FormationProgram extends Model
+class StateReason extends Model
 {
     use HasFactory;
 
     protected $fillable = ['name'];
 
-    public function ficha()
+    public function reason()
     {
-        return $this->hasMany(Ficha::class, 'ficha_id');
+        return $this->hasMany(Reason::class, 'state_reason_id');
     }
 }

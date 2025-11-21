@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\StateUser;
 use App\Models\Profile;
+use App\Models\Assistance;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function roleUser()
     {
         return $this->hasMany(RolesUser::class, 'user_id');
+    }
+
+    public function assistance()
+    {
+        return $this->hasMany(Assistance::class, 'user_id');
     }
 }

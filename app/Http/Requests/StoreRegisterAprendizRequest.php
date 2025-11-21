@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRegisterRequest extends FormRequest
+class StoreRegisterAprendizRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -19,7 +19,7 @@ class StoreRegisterRequest extends FormRequest
             'last_names' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'rol' => 'required|not_in:Aprendiz|exists:roles,name' //este valida que el rol exista
+            'ficha' => 'required|exists:fichas,name',//este valida que la ficha exista
         ];
     }
 
@@ -32,9 +32,8 @@ class StoreRegisterRequest extends FormRequest
             'last_names.required' => 'Los apellidos es obligatorio.',
             'phone.required' => 'El telefono es obligatorio.',
             'email.required' => 'El correo electronico es obligatorio.',
-            'rol.required' => 'El rol es obligatorio.',
-            'rol.exists' => 'El rol debe existir.',
-            'rol.not_in' => 'El rol no esta permitido.'
+            'ficha.required' => 'La ficha es obligatoria.',
+            'ficha.exists' => 'La ficha debe existir',
         ];
     }
     public function attributes()
@@ -45,7 +44,7 @@ class StoreRegisterRequest extends FormRequest
             'last_names' => 'apellidos',
             'phone' => 'teléfono',
             'email' => 'correo electrónico',
-            'rol' => 'rol del usuario',
+            'ficha' => 'ficha',
     ];
-}
+    }
 }
